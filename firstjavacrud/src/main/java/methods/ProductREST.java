@@ -1,4 +1,4 @@
-package com.restapi.firstjavacrud;
+package methods;
 
 import java.util.List;
 
@@ -10,36 +10,33 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.restapi.firstjavacrud.database.DatabaseConnection;
-
-import com.restapi.firstjavacrud.entitys.UserData;
+import com.restapi.firstjavacrud.database.RepositoryProductData;
+import com.restapi.firstjavacrud.entitys.ProductData;
 
 @RestController
-@RequestMapping("/user")
-public class UserREST {
+@RequestMapping("/product")
+public class ProductREST {
     @Autowired
-    private DatabaseConnection base;
+    private RepositoryProductData base;
 
     @GetMapping
-    public List<UserData> listAll() {
+    public List<ProductData> listAll() {
         return base.findAll();
     }
 
     @PostMapping
-    public void save(@RequestBody UserData userData) {
-        base.save(userData);
+    public void save(@RequestBody ProductData productData) {
+        base.save(productData);
     }
 
     @PutMapping
-    public void modifyUser(@RequestBody UserData userData) {
-        if (userData.getId() > 0)
-            base.save(userData);
-
+    public void modifyUser(@RequestBody ProductData productData) {
+        if (productData.getProduct_id() > 0)
+            base.save(productData);
     }
 
     @DeleteMapping
-    public void deleteUser(@RequestBody UserData userData) {
-        base.delete(userData);
+    public void deleteUser(@RequestBody ProductData productData) {
+        base.delete(productData);
     }
 }
