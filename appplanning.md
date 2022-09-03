@@ -19,7 +19,7 @@ A supermarket Java API that can do a C.R.U.D.
 ## Cart
     - cart_id REQUIRED
     - client_id REQUIRED
-    - productId REQUIRED
+    - product_id REQUIRED
 
 # Business Rules for MVP
     - The app will not require login or authentication. So the email and password are only examplarys.
