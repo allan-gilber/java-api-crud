@@ -10,26 +10,26 @@ import javax.persistence.Id;
 public class UserData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false)
+    private Long client_id;
+    @Column(nullable = false, unique = true)
     private String name = "";
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email = "";
     @Column(nullable = false)
     private String password = "";
 
     /**
-     * @return Long return the id
+     * @return Long return the client_id
      */
-    public Long getId() {
-        return id;
+    public Long getClient_id() {
+        return client_id;
     }
 
     /**
-     * @param id the id to set
+     * @param client_id the client_id to set
      */
-    public void setId(Long id) {
-        this.id = id;
+    public void setClient_id(Long client_id) {
+        this.client_id = client_id;
     }
 
     /**
