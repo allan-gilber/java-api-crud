@@ -1,4 +1,4 @@
-package methods;
+package com.restapi.firstjavacrud.methods;
 
 import java.util.List;
 
