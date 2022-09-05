@@ -1,4 +1,4 @@
-package methods;
+package com.restapi.firstjavacrud.methods;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
