@@ -6,6 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * It's a class that represents a user's data.
+ */
+
 @Entity
 public class UserData {
     @Id
@@ -72,6 +76,12 @@ public class UserData {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "UserData [client_id= " + client_id + ", email= " + email + ", name= " + name + ", password= " + password
+                + "]";
     }
 
 }
