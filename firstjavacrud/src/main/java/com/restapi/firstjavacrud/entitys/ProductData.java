@@ -6,6 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * This class is a POJO class that is used to map the data from the database to
+ * the object
+ */
+
 @Entity
 public class ProductData {
     @Id

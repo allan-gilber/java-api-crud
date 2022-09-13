@@ -13,7 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.restapi.firstjavacrud.database.RepositoryPurchaseCartData;
 import com.restapi.firstjavacrud.entitys.PurchaseCartData;
 
+/**
+ * This class is a REST controller that handles the requests for the purchase
+ * cart.
+ */
 @RestController
+/**
+ * This class is a REST controller that handles the requests for the purchase
+ * cart.
+ */
 @RequestMapping("/purchase-cart")
 public class PurchaseCartREST {
     @Autowired

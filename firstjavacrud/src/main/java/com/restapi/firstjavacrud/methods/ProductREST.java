@@ -13,7 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.restapi.firstjavacrud.database.RepositoryProductData;
 import com.restapi.firstjavacrud.entitys.ProductData;
 
+/**
+ * This class is a REST controller that maps the HTTP requests to the methods of
+ * the class
+ */
 @RestController
+/**
+ * It's a REST controller that maps to the /product endpoint and provides the
+ * ability to list, save,
+ * modify, and delete ProductData objects
+ */
 @RequestMapping("/product")
 public class ProductREST {
     @Autowired
