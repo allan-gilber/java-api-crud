@@ -44,9 +44,9 @@ public class UserREST {
                 throw new ApiRequestException("Opps, nothing was found. Empty Database", HttpStatus.NOT_FOUND);
 
             return new ResponseEntity<>(request.getContent(), HttpStatus.OK);
-        } catch (Exception e) {
-            System.out.println("Uncaught error: " + e.getMessage());
-            throw new ApiRequestException("Internal server error.");
+        } catch (ApiRequestException e) {
+            System.out.println("Error: " + e.getMessage());
+            throw new ApiRequestException(e.getMessage(), e.getHttpStatus());
         }
     }
 

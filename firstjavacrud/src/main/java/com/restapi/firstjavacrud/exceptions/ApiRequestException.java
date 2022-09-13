@@ -16,7 +16,8 @@ public class ApiRequestException extends RuntimeException {
     private HttpStatus httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
-    private String timestamp;
+    private String timestamp = ZonedDateTime.now(ZoneId.of("America/Sao_Paulo"))
+            .format(DateTimeFormatter.ofPattern("MM/dd/yyyy - HH:mm:ss z"));
 
     /**
      * @param message
@@ -28,8 +29,6 @@ public class ApiRequestException extends RuntimeException {
         this(message);
         if (httpStatus != null)
             this.httpStatus = httpStatus;
-        this.timestamp = ZonedDateTime.now(ZoneId.of("America/Sao_Paulo"))
-                .format(DateTimeFormatter.ofPattern("MM/dd/yyyy - HH:mm:ss z"));
     }
 
     /**
