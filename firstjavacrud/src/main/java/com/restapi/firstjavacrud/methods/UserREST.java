@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.restapi.firstjavacrud.database.RepositoryUserData;
 import com.restapi.firstjavacrud.entitys.UserData;
 import com.restapi.firstjavacrud.exceptions.ApiRequestException;
@@ -31,14 +32,14 @@ public class UserREST {
      * It's a function that returns a list of users from the database, and it's
      * paginated
      * 
-     * @param page The page number to retrieve.
+     * @param pageNumber The page number to retrieve.
      * @return A list of users.
      */
     @GetMapping
-    public ResponseEntity<?> listAll(@RequestParam(defaultValue = "0") int page) {
+    public ResponseEntity<?> listAll(
+            @RequestParam(name = "pageNumber", defaultValue = "0", required = false) int pageNumber) {
         try {
-            Page<UserData> request = base.findAll(PageRequest.of(page, 10, Sort.by(Sort.Direction.ASC, "name")));
-            System.out.println(request.getNumberOfElements());
+            Page<UserData> request = base.findAll(PageRequest.of(pageNumber, 10, Sort.by(Sort.Direction.ASC, "name")));
 
             if (request.getNumberOfElements() == 0)
                 throw new ApiRequestException("Opps, nothing was found. Empty Database", HttpStatus.NOT_FOUND);

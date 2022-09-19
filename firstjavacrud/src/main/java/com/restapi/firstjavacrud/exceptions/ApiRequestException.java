@@ -20,15 +20,18 @@ public class ApiRequestException extends RuntimeException {
             .format(DateTimeFormatter.ofPattern("MM/dd/yyyy - HH:mm:ss z"));
 
     /**
+     * HttpStatus is optional. Default is "HttpStatus.INTERNAL_SERVER_ERROR".
+     * 
      * @param message
-     * @param httpStatus // Optional param
+     * @param httpStatus Optional param
+     * 
      */
     public ApiRequestException(
             String message,
             HttpStatus httpStatus) {
         this(message);
         if (httpStatus != null)
-            this.httpStatus = httpStatus;
+            setHttpStatus(httpStatus);
     }
 
     /**
@@ -56,4 +59,13 @@ public class ApiRequestException extends RuntimeException {
         return httpStatus;
     }
 
+    /**
+     * This function sets the httpStatus variable to the value of the httpStatus
+     * parameter
+     * 
+     * @param httpStatus The HTTP status code to return.
+     */
+    public void setHttpStatus(HttpStatus httpStatus) {
+        this.httpStatus = httpStatus;
+    }
 }
