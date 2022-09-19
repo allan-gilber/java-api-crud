@@ -1,5 +1,7 @@
 package com.restapi.firstjavacrud.methods;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -52,7 +54,7 @@ public class UserREST {
     }
 
     @PostMapping
-    public void save(@RequestBody UserData userData) {
+    public void save(@Valid @RequestBody UserData userData) {
         base.save(userData);
     }
 
