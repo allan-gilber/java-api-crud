@@ -1,5 +1,7 @@
 package com.restapi.firstjavacrud.methods;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.restapi.firstjavacrud.database.RepositoryUserData;
 import com.restapi.firstjavacrud.entitys.UserData;
 import com.restapi.firstjavacrud.exceptions.ApiRequestException;
+import com.restapi.firstjavacrud.viewers.ApiBodyResponseViewer;
+import com.restapi.firstjavacrud.viewers.successMessageViewer;
 
 @/**
   * This class is a REST controller that handles the requests for the user data
@@ -52,19 +56,33 @@ public class UserREST {
     }
 
     @PostMapping
-    public void save(@RequestBody UserData userData) {
-        base.save(userData);
-    }
-
-    @PutMapping
-    public void modifyUser(@RequestBody UserData userData) {
-        if (userData.getClient_id() > 0)
+    public ResponseEntity<?> save(@Valid @RequestBody UserData userData) {
+        try {
             base.save(userData);
+            String message = new successMessageViewer().userPostsuccess(userData.getName());
+            ;
+            System.out.println("message: " + message);
 
+            Object teste = new ApiBodyResponseViewer(message);
+            System.out.println("333 " + teste);
+            return new ResponseEntity<>(new ApiBodyResponseViewer(message),
+                    HttpStatus.OK);
+        } catch (ApiRequestException e) {
+            System.out.println("Error: " + e.getMessage());
+            throw new ApiRequestException(e.getMessage(), e.getHttpStatus());
+        }
     }
 
-    @DeleteMapping
-    public void deleteUser(@RequestBody UserData userData) {
-        base.delete(userData);
-    }
+    // Maybe in the future?
+    // @PutMapping
+    // public void modifyUser(@RequestBody UserData userData) {
+    // if (userData.getClient_id() > 0)
+    // base.save(userData);
+    // }
+
+    // For future updates.
+    // @DeleteMapping
+    // public void deleteUser(@RequestBody UserData userData) {
+    // base.delete(userData);
+    // }
 }

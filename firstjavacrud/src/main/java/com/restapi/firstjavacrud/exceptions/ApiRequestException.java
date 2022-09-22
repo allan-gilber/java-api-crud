@@ -9,14 +9,17 @@ import org.springframework.http.HttpStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
- * It's a custom exception class that extends RuntimeException and has a
- * HttpStatus property
+ * This class is a custom exception that extends RuntimeException and is used to
+ * return a custom error
+ * message to the client.
  */
+
 public class ApiRequestException extends RuntimeException {
     private HttpStatus httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+    private String zoneId = "America/Sao_Paulo";
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
-    private String timestamp = ZonedDateTime.now(ZoneId.of("America/Sao_Paulo"))
+    private String timestamp = ZonedDateTime.now(ZoneId.of(zoneId))
             .format(DateTimeFormatter.ofPattern("MM/dd/yyyy - HH:mm:ss z"));
 
     /**
@@ -50,21 +53,10 @@ public class ApiRequestException extends RuntimeException {
         return timestamp;
     }
 
-    /**
-     * This function returns the HTTP status code of the response
-     * 
-     * @return The httpStatus variable is being returned.
-     */
     public HttpStatus getHttpStatus() {
         return httpStatus;
     }
 
-    /**
-     * This function sets the httpStatus variable to the value of the httpStatus
-     * parameter
-     * 
-     * @param httpStatus The HTTP status code to return.
-     */
     public void setHttpStatus(HttpStatus httpStatus) {
         this.httpStatus = httpStatus;
     }

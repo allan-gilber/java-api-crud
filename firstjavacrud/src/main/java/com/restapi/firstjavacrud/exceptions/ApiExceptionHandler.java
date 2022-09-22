@@ -4,6 +4,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.restapi.firstjavacrud.viewers.ApiBodyResponseViewer;
+
 /**
  * When an ApiRequestException is thrown, return a ResponseEntity with the
  * exception's message and
@@ -26,9 +28,8 @@ public class ApiExceptionHandler {
     public ResponseEntity<Object> handleApiException(Exception exception) {
         ApiRequestException exceptionArgs = (ApiRequestException) exception;
         return new ResponseEntity<>(
-                new ApiExceptionResponse(
-                        exceptionArgs.getMessage(),
-                        exceptionArgs.getTimestamp()),
+                new ApiBodyResponseViewer(
+                        exceptionArgs.getMessage()),
                 exceptionArgs.getHttpStatus());
     }
 }
