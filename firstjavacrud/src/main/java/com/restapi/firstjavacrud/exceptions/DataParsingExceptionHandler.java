@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import com.restapi.firstjavacrud.viewers.ApiBodyResponseViewer;
+
 @ControllerAdvice
 public class DataParsingExceptionHandler {
         String message;
@@ -41,9 +43,8 @@ public class DataParsingExceptionHandler {
                                 HttpStatus.BAD_REQUEST);
                 System.out.println("DataParsingExceptionHandler Error: " + exceptionArgs.getMessage());
                 return new ResponseEntity<>(
-                                new ApiExceptionResponse(
-                                                exceptionArgs.getMessage(),
-                                                exceptionArgs.getTimestamp()),
+                                new ApiBodyResponseViewer(
+                                                exceptionArgs.getMessage()),
                                 HttpStatus.BAD_REQUEST);
         }
 
@@ -60,9 +61,8 @@ public class DataParsingExceptionHandler {
                                 message,
                                 HttpStatus.BAD_REQUEST);
                 return new ResponseEntity<>(
-                                new ApiExceptionResponse(
-                                                exceptionArgs.getMessage(),
-                                                exceptionArgs.getTimestamp()),
+                                new ApiBodyResponseViewer(
+                                                exceptionArgs.getMessage()),
                                 HttpStatus.BAD_REQUEST);
         }
 
@@ -71,7 +71,7 @@ public class DataParsingExceptionHandler {
          * the message to
          * the exception message, creates a new ApiRequestException with the message and
          * HttpStatus.BAD_REQUEST, and returns a new ResponseEntity with the
-         * ApiExceptionResponse and
+         * ApiBodyResponseViewer and
          * HttpStatus.BAD_REQUEST
          * 
          * @param exception The exception that was thrown
@@ -85,9 +85,8 @@ public class DataParsingExceptionHandler {
                                 message,
                                 HttpStatus.BAD_REQUEST);
                 return new ResponseEntity<>(
-                                new ApiExceptionResponse(
-                                                exceptionArgs.getMessage(),
-                                                exceptionArgs.getTimestamp()),
+                                new ApiBodyResponseViewer(
+                                                exceptionArgs.getMessage()),
                                 HttpStatus.BAD_REQUEST);
         }
 
@@ -103,7 +102,7 @@ public class DataParsingExceptionHandler {
         @ExceptionHandler({ ConstraintViolationException.class })
         public ResponseEntity<Object> ConstraintViolationException(ConstraintViolationException exception,
                         ServletWebRequest request) {
-
+                System.out.println("55555");
                 Set<ConstraintViolation<?>> violationsList = exception.getConstraintViolations();
                 String mappedList = mapListOfErrorsIntoString(violationsList);
                 setListOfErrors(mappedList);
@@ -112,9 +111,8 @@ public class DataParsingExceptionHandler {
                                 HttpStatus.BAD_REQUEST);
 
                 return new ResponseEntity<>(
-                                new ApiExceptionResponse(
-                                                listOfErrors,
-                                                exceptionArgs.getTimestamp()),
+                                new ApiBodyResponseViewer(
+                                                listOfErrors),
                                 HttpStatus.BAD_REQUEST);
         }
 
@@ -125,6 +123,7 @@ public class DataParsingExceptionHandler {
          * @return A list of strings.
          */
         public String mapListOfErrorsIntoString(Set<ConstraintViolation<?>> listOfErrors) {
+                System.out.println("55555");
                 return listOfErrors.stream()
                                 .map(violation -> String.format("The field %s is invalid: %s",
                                                 StreamSupport.stream(violation.getPropertyPath().spliterator(), false)
