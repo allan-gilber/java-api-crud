@@ -18,6 +18,7 @@ import javax.validation.constraints.Size;
 public class UserData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Size(min = 6, max = 70)
     private Long client_id;
 
     @Column(nullable = false, unique = true)
@@ -34,7 +35,7 @@ public class UserData {
     @Column(nullable = false)
     @NotEmpty(message = "it cannot be empty")
     @NotBlank(message = "it cannot be blank")
-    @Size(min = 6, max = 100, message = "it must have atleast {min} characters length")
+    @Size(min = 6, max = 50, message = "it must have atleast {min} characters length")
     private String password = "";
 
     public Long getClient_id() {
