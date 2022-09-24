@@ -106,9 +106,6 @@ public class DataParsingExceptionHandler {
                 Set<ConstraintViolation<?>> violationsList = exception.getConstraintViolations();
                 String mappedList = mapListOfErrorsIntoString(violationsList);
                 setListOfErrors(mappedList);
-                ApiRequestException exceptionArgs = new ApiRequestException(
-                                message,
-                                HttpStatus.BAD_REQUEST);
 
                 return new ResponseEntity<>(
                                 new ApiBodyResponseViewer(
